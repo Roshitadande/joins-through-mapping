@@ -22,3 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/country', [CountryController::class, 'index']);
 Route::get('/countryData',[CountryApiController::class,'showCountry']);
+
+
+Route::post('/countries', [CountryApiController::class, 'store']);   
+Route::put('/countriesupdate/{country}', [CountryApiController::class, 'update']); 
+Route::delete('/countriesdelete/{country}', [CountryApiController::class, 'destroy']);
