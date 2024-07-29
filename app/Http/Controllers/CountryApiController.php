@@ -10,6 +10,10 @@ class CountryApiController extends Controller
     public function showCountry(){
        return Country::all();
     }
+    public function singleData($id){
+        $country=Country::find($id);
+        return response()->json($country, 200);
+    }
 
     public function store(Request $request)
     {
@@ -20,18 +24,21 @@ class CountryApiController extends Controller
         $countries = Country::create($request->all());
         return response()->json($countries, 201);
     }
-    public function update(Request $request, Country $countries)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
+            'name' => 'required|unique:country,name,' . $id,
         ]);
 
-        $countries->update($request->all());
-        return response()->json($countries, 200);
+        $country = Country::findOrFail($id);
+        $country->name = $request->name;
+        $country->save();
+        return response()->json($country, 200);
     }
-    public function destroy(Country $countries)
+    public function destroy($id)
     {
-        $countries->delete();
+        $country = Country::findOrFail($id);
+        $country->delete();
         return response()->json(null, 204);
     }
 }

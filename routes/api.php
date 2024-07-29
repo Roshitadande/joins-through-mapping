@@ -20,10 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/country', [CountryController::class, 'index']);
+Route::post('/country/{id}', [CountryController::class, 'update']);
 Route::get('/countryData',[CountryApiController::class,'showCountry']);
+Route::get('/singlecountry/{id}',[CountryApiController::class,'singleData']);
 
 
 Route::post('/countries', [CountryApiController::class, 'store']);   
-Route::put('/countriesupdate/{country}', [CountryApiController::class, 'update']); 
-Route::delete('/countriesdelete/{country}', [CountryApiController::class, 'destroy']);
+Route::post('/countries/{id}', [CountryApiController::class, 'update']); 
+Route::delete('/countries/{id}', [CountryApiController::class, 'destroy']);
