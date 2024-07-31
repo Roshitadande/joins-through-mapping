@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{ $country->id }}</td>
                     <td>{{ $country->name }}</td>
-                    
+                
                     <td>
                         <a href="{{route('country.edit',$country->id)}}" class="btn btn-sm btn-primary">Edit</a>
                         <form action="{{route('country.destroy',$country->id)}}" method="POST" style="display: inline-block;">
