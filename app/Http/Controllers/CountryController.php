@@ -44,6 +44,19 @@ class CountryController extends Controller
         return redirect()->route('country.index')
             ->with('success', 'Country deleted successfully');
     }
+    public function trashedData()
+    {
+        $countries = Country::onlyTrashed()->get(); 
+        return view('country.restore', compact('countries'));
+    }
+    public function restoreTrashData($id){
+        $country = Country::withTrashed()->find($id);
+        if ($country) {
+            $country->restore(); 
+            return redirect()->route('country.index')->with('success', 'Country restored successfully!');
+        }
+        return redirect()->route('country.restore')->with('error', 'Country not found!');
+    }
 
     public function store(Request $request)
     {

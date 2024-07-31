@@ -17,6 +17,9 @@ Route::post('/store', [CountryController::class, 'store'])->name('country.store'
 Route::get('/country/{countries}/edit', [CountryController::class, 'edit'])->name('country.edit');
 Route::put('/country/{country}', [CountryController::class, 'update'])->name('country.update');
 Route::delete('/country/{country}', [CountryController::class, 'destroy'])->name('country.destroy');
+Route::get('/country/trashed', [CountryController::class, 'trashedData'])->name('country.trashed');
+Route::post('/country/{id}/restore', [CountryController::class, 'restoreTrashData'])->name('country.restore');
+
 
 Route::get('/city', [CityController::class, 'index'])->name('city.index');
 Route::get('/addCity',[CityController::class,'create'])->name('city.create');
